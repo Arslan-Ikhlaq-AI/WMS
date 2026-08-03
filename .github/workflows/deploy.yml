@@ -1,0 +1,26 @@
+name: Deploy Laravel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-ssh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Connect to Server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            echo "Connected successfully!"
+            whoami
+            pwd
+            ls -la
