@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Log in — {{ config('app.name') }}</title>
     @vite(['resources/css/app.css'])
+    
 </head>
 <body class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
     <div class="w-full max-w-sm bg-white rounded-lg shadow p-8">
