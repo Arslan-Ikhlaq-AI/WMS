@@ -17,7 +17,6 @@
         <form method="POST" action="{{ route('login.store') }}" class="space-y-4">
             {{-- CSRF token: required on every POST form in Laravel --}}
             @csrf
-
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input id="email" name="email" type="email" value="{{ old('email') }}"
