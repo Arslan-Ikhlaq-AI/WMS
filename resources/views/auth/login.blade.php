@@ -19,7 +19,6 @@
             @csrf
             <div>
                 
-            
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input id="email" name="email" type="email" value="{{ old('email') }}"
                        required autofocus
