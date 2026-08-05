@@ -13,7 +13,7 @@
         {{-- Show the "logged out" or other status message, if any --}}
         @if (session('status'))
             <div class="mb-4 text-sm text-green-600">{{ session('status') }}</div>
-        @endif
+        @endif  
         <form method="POST" action="{{ route('login.store') }}" class="space-y-4">
             {{-- CSRF token: required on every POST form in Laravel --}}
             @csrf
