@@ -1,5 +1,4 @@
 name: Deploy Laravel
-
 on:
   push:
     branches:
@@ -8,14 +7,22 @@ on:
 jobs:
   test-ssh:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: Connect to Server
+
+      # ------- NEW STEP ADDED HERE -------
+      - name: Connect to Tailscale Network
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          version: latest
+      # ----------------------------------
+
+      - name: Connect to Server via SSH
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.HOST }}          # Keep this as your Tailscale IP (e.g., 100.96.45.12)
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
