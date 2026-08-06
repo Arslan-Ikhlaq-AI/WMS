@@ -11,18 +11,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # ------- NEW STEP ADDED HERE -------
-      - name: Connect to Tailscale Network
-        uses: tailscale/github-action@v2
-        with:
-          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
-          version: latest
-      # ----------------------------------
+      - name: Install and Connect to Tailscale
+        run: |
+          curl -fsSL https://tailscale.com/install.sh | sh
+          sudo tailscale up --authkey=${{ secrets.TAILSCALE_AUTHKEY }}
 
       - name: Connect to Server via SSH
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.HOST }}          # Keep this as your Tailscale IP (e.g., 100.96.45.12)
+          host: ${{ secrets.HOST }}          # Keep your 100.x.x.x Tailscale IP here
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
